@@ -29,16 +29,15 @@ namespace Unboxer
                     FileInfo fInfo = new FileInfo(string.Format("TarOutPut/"+ TarFromFile.Name));
                     FileStream file = fInfo.Create();
                     byte[] bufferFromTar = new byte[tarInputStream.Length];
-                    tarInputStream.Read(bufferFromTar, 0, TarFromFile.Size);
-                    file.Write(bufferFromTar, 0, TarFromFile.Size);
+                    tarInputStream.CopyTo(file);
+                    //Read(bufferFromTar, 0, tarInputStream.Length);
+                    //file.Write(bufferFromTar, 0, tarInputStream.Length);
                     file.Close();   
 
                     Console.WriteLine ("exeption");
                 }
                 TarFromFile = tarInputStream.GetNextEntry();
             }
-            //tarInputStream.Close();
-            //FastTar tr = new FastTar();
 
 
             Console.WriteLine ("readed");
